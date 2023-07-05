@@ -3,20 +3,25 @@ import asyncio
 import random
 import time
 
+TIC_TIMEOUT = 0.1
 
 async def blink(canvas, row, column, symbol='*'):
     while True:
         canvas.addstr(row, column, symbol, curses.A_DIM)
-        await asyncio.sleep(0)
+        for _ in range(20):
+            await asyncio.sleep(0)
 
         canvas.addstr(row, column, symbol)
-        await asyncio.sleep(0)
+        for _ in range(3):
+            await asyncio.sleep(0)
 
         canvas.addstr(row, column, symbol, curses.A_BOLD)
-        await asyncio.sleep(0)
+        for _ in range(5):
+            await asyncio.sleep(0)
 
         canvas.addstr(row, column, symbol)
-        await asyncio.sleep(0)
+        for _ in range(3):
+            await asyncio.sleep(0)
 
 
 def draw(canvas):
@@ -33,7 +38,7 @@ def draw(canvas):
                 coroutines.remove(coroutine)
                 break
         canvas.refresh()
-        time.sleep(0.5)
+        time.sleep(TIC_TIMEOUT)
 
 
 if __name__ == '__main__':
