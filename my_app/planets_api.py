@@ -20,7 +20,7 @@ async def main(api_key, dates):
         for i, date in enumerate(dates):
             async with session.get(f"https://api.nasa.gov/planetary/apod?api_key={api_key}&date={date}") as response:
                 json_data = await response.json()
-                pictures.append({"num": i, "status": response.status,
+                pictures.append({"num": i+1, "status": response.status,
                                  'title': json_data["title"],
                                  'url': json_data["url"],
                                  'media_type': json_data["media_type"]
