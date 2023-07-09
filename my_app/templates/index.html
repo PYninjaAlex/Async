@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Алексей я гений</title>
+    <style>
+        html {
+            font-family: Verdana, "sans-serif";
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(#f9de59, #f98365) no-repeat;
+        }
+        
+    </style>
+</head>
+<body>
+<div>
+    {% for planet in results %}
+        <div>
+            <span>{{planet.num }}</span>
+            <span>{{ planet.title }}</span>
+            <img src="{{ planet.url }}" alt="Я не гений">
+        </div>
+    {% endfor %}
+</div>
+</body>
+</html>
