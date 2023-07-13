@@ -25,14 +25,17 @@
         margin-bottom: 10px;
         justify-content: center;
     }
+
+    .planet {
+        margin-bottom: 10px;
+    }
     </style>
 </head>
 <body>
 <main>
     {% for planet in results %}
         <div class="planet">
-            <img src="{{ planet.url }}">
-            <video src="{{ planet.url }}"></video> <br>
+            <img src="{{ planet.url }}" alt="Error" width="700px" height="300px"> <br>
             <span>{{ planet.num }}:</span>
             <span>{{ planet.title }}</span>
         </div>
