@@ -38,8 +38,7 @@ async def fire(canvas, start_row, start_column, rows_speed=-0.3, columns_speed=0
 def draw(canvas):
     curses.curs_set(False)
     canvas.border()
-    row, column = (5, 20)
-    coroutines = [fire(canvas, start_row=2, start_column=10) for _ in range(5)]
+    coroutines = [fire(canvas, start_row=10, start_column=20) for _ in range(5)]
 
     while True:
         for coroutine in coroutines:
