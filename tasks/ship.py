@@ -39,11 +39,13 @@ async def blink(canvas, row, column, symbol, ping):
             await asyncio.sleep(0)
 
 
-async def animate_space_ship(canvas, frame, row=5, column=12, ping=50):
+async def animate_space_ship(canvas, frame, row=6, column=122, ping=10):
     for _ in range(ping):
         await asyncio.sleep(0)
-    canvas.addstr(row, column, frame)
-    await asyncio.sleep(0)
+    while True:
+        canvas.addstr(row, column, frame)
+        for _ in range(ping):
+            await asyncio.sleep(0)
 
 
 def draw(canvas):
@@ -55,11 +57,12 @@ def draw(canvas):
     stars_coroutines = [
         blink(canvas, row=random.randint(0, y), column=random.randint(0, x), symbol=random.choice(symbols),
               ping=random.randint(10, ping))
-        for _ in range(2)]
+        for _ in range(100)]
+
     ship_frame_1 = read_frame_1()
     ship_frame_2 = read_frame_2()
-    iterator = 0
     ship_coroutines = [animate_space_ship(canvas, ship_frame_1), animate_space_ship(canvas, ship_frame_2)]
+    iterator = 0
 
     while True:
         for coroutine in stars_coroutines:
@@ -74,11 +77,13 @@ def draw(canvas):
                 pass
         try:
             if not iterator or not iterator % 2:
-                ship_coroutines[0].send(None)
+                coroutine = ship_coroutines[0]
             else:
-                ship_coroutines[1].send(None)
+                coroutine = ship_coroutines[1]
+            coroutine.send(None)
         except StopIteration:
-            pass
+            stars_coroutines.remove(coroutine)
+            break
         except RuntimeError:
             pass
         except curses.error:
