@@ -1,5 +1,4 @@
 """Weather aplication."""
-import random
 import os
 import aiohttp
 import asyncio
